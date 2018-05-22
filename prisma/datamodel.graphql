@@ -1,0 +1,13 @@
+type User{
+  id: ID! @unique
+  firstName: String
+  lastName: String
+  city: String
+  state: String
+  country: String
+  zip: Int
+  phone: Int
+  dob: Int
+  password: String
+  email: String
+}
