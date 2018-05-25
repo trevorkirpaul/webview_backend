@@ -14,12 +14,13 @@ const resolvers = {
       )
     },
     signin: (_, args, context, info) => {
+      console.log({ username: args.email, password: args.password })
       return context.prisma.query.users(
         {
           where: {
             AND: [
-              {email_contains: args.email},
-              {password_contains: args.password},
+              {email: args.email},
+              {password: args.password},
             ]
           },
         },
