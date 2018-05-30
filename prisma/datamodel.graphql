@@ -11,3 +11,10 @@ type User{
   password: String
   email: String
 }
+
+type InsurancePackage{
+  id: ID! @unique
+  name: String
+  price: Int
+  tier: String
+}

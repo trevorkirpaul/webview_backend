@@ -7,9 +7,12 @@
     "start": "nodemon src/index.js"
   },
   "dependencies": {
+    "amazon-cognito-identity-js": "^2.0.6",
     "graphql-request": "^1.6.0",
     "graphql-yoga": "^1.13.1",
+    "node-fetch-polyfill": "^2.0.6",
     "nodemon": "^1.17.4",
     "prisma-binding": "^2.0.0"
-  }
+  },
+  "devDependencies": {}
 }

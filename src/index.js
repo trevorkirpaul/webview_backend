@@ -13,6 +13,21 @@ const resolvers = {
         info,
       )
     },
+    insurancePackage: (_, args, context, info) => {
+      return context.prisma.query.insurancePackage(
+        {
+          where: {
+            id: args.id
+          }
+        },
+        info
+      )
+    },
+    insurancePackages: (_, args, context, info) => {
+      return context.prisma.query.insurancePackages(
+        info
+      )
+    },
     signin: (_, args, context, info) => {
       console.log({ username: args.email, password: args.password })
       return context.prisma.query.users(

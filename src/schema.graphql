@@ -1,9 +1,13 @@
 # import Post from './generated/prisma.graphql'
 # import User from './generated/prisma.graphql'
+# import InsurancePackage from './generated/prisma.graphql'
+# import InsurancePackages from './generated/prisma.graphql'
 
 type Query {
   user(id: String): User
   signin(email: String!, password: String!): [User]
+  insurancePackage(id: String): InsurancePackage
+  insurancePackages: InsurancePackage
 }
 
 type Mutation {
