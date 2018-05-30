@@ -36,33 +36,33 @@ const userData = {
   emails as usernames
 */
 
-const dataEmail = {
-  Name: 'email',
-  Value: 'test3@test.com'
-}
+// const dataEmail = {
+//   Name: 'email',
+//   Value: 'test3@test.com'
+// }
 
-const dataPhoneNumber = {
-  Name: 'phone_number',
-  Value: ''
-}
+// const dataPhoneNumber = {
+//   Name: 'phone_number',
+//   Value: ''
+// }
 
-const attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail)
-const attributePhoneNumber = new AmazonCognitoIdentity.CognitoUserAttribute(dataPhoneNumber)
+// const attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail)
+// const attributePhoneNumber = new AmazonCognitoIdentity.CognitoUserAttribute(dataPhoneNumber)
 
-const attributeList = [
-  attributeEmail,
-  attributePhoneNumber,
-]
+// const attributeList = [
+//   attributeEmail,
+//   attributePhoneNumber,
+// ]
 
-let cognitoUser;
+// let cognitoUser;
 
 // Register/Create new user
 // @params = (username, password, attributes, ???, callback)
-userPool.signUp('test3@test.com', 'PASSword1987!', attributeList, null, (err, result) => {
-  if (err) { return console.log('ERROR', err) }
-  cognitoUser = result.user
-  console.log(`user name is ${cognitoUser.getUsername()}`)
-})
+// userPool.signUp('test3@test.com', 'PASSword1987!', attributeList, null, (err, result) => {
+//   if (err) { return console.log('ERROR', err) }
+//   cognitoUser = result.user
+//   console.log(`user name is ${cognitoUser.getUsername()}`)
+// })
 
 /*
   ? Helpful Links:
@@ -70,3 +70,31 @@ userPool.signUp('test3@test.com', 'PASSword1987!', attributeList, null, (err, re
   (Example Code from AWS Docs)[https://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-user-identity-pools-javascript-examples.html]
   (Tutorial from AWS Docs)[https://docs.aws.amazon.com/cognito/latest/developerguide/tutorial-integrating-user-pools-javascript.html]
 */
+
+// ? Created a promise based helper fxn
+
+const createCognitoUser = ({ username, password, email, phone }) => {
+  const attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute({ Name: 'email', Value: email })
+  const attributePhoneNumber = new AmazonCognitoIdentity.CognitoUserAttribute({ Name: 'phone_number', Value: phone })
+  const attributeList = [
+    attributeEmail,
+    attributePhoneNumber,
+  ]
+  let cognitoUser;
+  return promise = new Promise((resolve, reject) => {
+    userPool.signUp(username, password, attributeList, null, (err, result) => {
+      if (err) { return reject(err) }
+      cognitoUser = result.user
+      resolve(cognitoUser.getUsername())
+    })
+  })
+}
+
+// ? EXAMPLE USE OF HELPER FXN
+createCognitoUser({ username: 'from1My@function.com', password: 'PASSword1987!', email: 'from1My@function.com', phone: ''})
+  .then(data => console.log(data))
+  .catch(e => console.log(e))
+
+module.exports = {
+  createCognitoUser
+}

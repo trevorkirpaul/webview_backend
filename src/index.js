@@ -1,5 +1,8 @@
 const { GraphQLServer } = require('graphql-yoga')
 const { Prisma } = require('prisma-binding')
+const cognitoMethods = require('./cognito')
+
+const { createCognitoUser } = cognitoMethods;
 
 const resolvers = {
   Query: {
