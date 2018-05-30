@@ -20,10 +20,10 @@ const poolData = {
 const userPool = new CognitoUserPool(poolData)
 
 // username is out AWS account
-const userData = {
-  Username: 'trevor.kirpaul',
-  Pool: userPool
-}
+// const userData = {
+//   Username: 'trevor.kirpaul',
+//   Pool: userPool
+// }
 
 /*
   ? **-- REGISTER/CREATE USER FEATURE --**
@@ -73,6 +73,7 @@ const userData = {
 
 // ? Created a promise based helper fxn
 
+// * CREATE / REGISTER
 const createCognitoUser = ({ username, password, email, phone }) => {
   const attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute({ Name: 'email', Value: email })
   const attributePhoneNumber = new AmazonCognitoIdentity.CognitoUserAttribute({ Name: 'phone_number', Value: phone })
@@ -90,10 +91,34 @@ const createCognitoUser = ({ username, password, email, phone }) => {
   })
 }
 
-// ? EXAMPLE USE OF HELPER FXN
-createCognitoUser({ username: 'from1My@function.com', password: 'PASSword1987!', email: 'from1My@function.com', phone: ''})
-  .then(data => console.log(data))
-  .catch(e => console.log(e))
+// ? EXAMPLE USE OF CREATE / REGISTER FXN
+// createCognitoUser({ username: 'from1My@function.com', password: 'PASSword1987!', email: 'from1My@function.com', phone: ''})
+//   .then(data => console.log(data))
+//   .catch(e => console.log(e))
+
+// * AUTHENTICATE USER
+const username = 'from1My@function.com'
+const authData = {
+  username,
+  password: 'PASSword1987!'
+}
+
+const authDetails = new AmazonCognitoIdentity.AuthenticationDetails(authData)
+const userData = {
+  username: 'trevor.kirpaul', // trevor.kirpaul could be the right answer
+  Pool: userPool
+}
+const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+// method to auth user
+cognitoUser.authenticateUser(authDetails, {
+  onSuccess: function(result) {
+    return console.log('TOKEN', result.getAccessToken().getJwtToken())
+  },
+  onFailure: function(err) {
+    return console.log('ERROR', err)
+  }
+})
 
 module.exports = {
   createCognitoUser
