@@ -34,9 +34,9 @@ const deleteCognitoUser = (Username) => {
   })
 }
 
-deleteCognitoUser('newLocation@function.com')
-  .then(res => console.log('DELETE_SUCCESS', res))
-  .catch(err => console.log('DELETE_FAIL', err))
+// deleteCognitoUser('from1My@function.com')
+//   .then(res => console.log('DELETE_SUCCESS', res))
+//   .catch(err => console.log('DELETE_FAIL', err))
 
 module.exports = {
   deleteCognitoUser
