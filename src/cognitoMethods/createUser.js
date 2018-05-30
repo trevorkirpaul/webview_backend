@@ -29,9 +29,9 @@ const createCognitoUser = ({ username, password, email, phone }) => {
 }
 
 // ? EXAMPLE USE OF CREATE / REGISTER FXN
-createCognitoUser({ username: 'newLocation@function.com', password: 'PASSword1987!', email: 'newLocation@function.com', phone: ''})
-  .then(data => console.log(data))
-  .catch(e => console.log(e))
+// createCognitoUser({ username: 'newLocation@function.com', password: 'PASSword1987!', email: 'newLocation@function.com', phone: ''})
+//   .then(data => console.log(data))
+//   .catch(e => console.log(e))
 
 module.exports = {
   createCognitoUser
