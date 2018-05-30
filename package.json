@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^2.0.6",
+    "aws-sdk": "^2.248.1",
     "graphql-request": "^1.6.0",
     "graphql-yoga": "^1.13.1",
     "node-fetch-polyfill": "^2.0.6",
